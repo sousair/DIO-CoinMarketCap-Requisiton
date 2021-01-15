@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="coins"></div>
+    <a></a>
     <script type="text/javascript">
 
         var apiKey = {
@@ -19,13 +20,32 @@
         .then(api => {
             console.log(api)
             var text = ''
+            // Hardcoded porém pode fazer uma integração com outro módulo,
+            // assim como todo script
+            const arrLink = [
+                'https://coinmarketcap.com/pt-br/currencies/bitcoin/',
+                'https://coinmarketcap.com/pt-br/currencies/litecoin/',
+                'https://coinmarketcap.com/pt-br/currencies/namecoin/',
+                'https://coinmarketcap.com/pt-br/currencies/terracoin/',
+                'https://coinmarketcap.com/pt-br/currencies/peercoin/',
+                'https://coinmarketcap.com/pt-br/currencies/feathercoin/',
+                'https://coinmarketcap.com/pt-br/currencies/freicoin/',
+                'https://coinmarketcap.com/pt-br/currencies/ixcoin/',
+                'https://coinmarketcap.com/pt-br/currencies/digitalcoin/',
+                'https://coinmarketcap.com/pt-br/currencies/goldcoin/',
+            ]
             for(let i = 0; i < 10; i++) {
+                const data = api.data[i].first_historical_data.split('')
                 text += `
                 <div class="media">
-                    <img src="coin.jpg" alt="coin" class="align-self-center mr-3" width="100" height="60">
+                    <img src="coin.jpg" alt="coin" class="align-self-center mr-4 ml-3" width="160" height="100px">
                     <div class="media-body">
-                        <h5 class="mt-2">${api.data[i].name}</h5>
-                        <p>${api.data[i].symbol}</p>
+                        <a href="${arrLink[i]}" target="_blank"
+                        class="mt-2">
+                            <h5>${api.data[i].name}</h5>
+                        </a>
+                        <p class="font-weight-bold">${api.data[i].symbol}</p>
+                        <p>Primeiro dado histórico: ${data[8]}${data[9]}/${data[5]}${data[6]}/${data[0]}${data[1]}${data[2]}${data[3]} </p>
                     </div>
                 </div>
                 `
